@@ -1,0 +1,28 @@
+<div id="content_detail" class="ui-corner-all ui-widget-content">
+<h1 class="title"><%= t('page.showing', model: t('activemodel.models.resource')) -%></h1>
+<div id="content_list">
+
+<p>
+  <strong><%= t('activemodel.attributes.resource.title') %></strong>
+  <%= @resource.title %>
+</p>
+
+<p>
+  <strong><%= t('activemodel.attributes.resource.date_of_publication') %></strong>
+  <%= @resource.date_of_publication %>
+</p>
+
+<p>
+  <strong><%= t('activemodel.attributes.resource.attachment') %></strong>
+  <%= link_to_attachment(@resource) %>
+</p>
+
+</div>
+</div>
+
+<div id="submenu" class="ui-corner-all ui-widget-content">
+  <ul>
+    <li><%= link_to t('page.edit'), edit_resource_path(@resource) %></li>
+    <li><%= link_to t('page.back'), resources_path %></li>
+  </ul>
+</div>

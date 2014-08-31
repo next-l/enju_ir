@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      resource: Resource
+  activemodel:
+    models:
+      resource: Resource
+    attributes:
+      resource:
+        title: Title
+        date_of_publication: Date of publication
+        attachment: Attachment

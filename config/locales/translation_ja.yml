@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      resource: リポジトリの資料
+  activemodel:
+    models:
+      resource: リポジトリの資料
+    attributes:
+      resource:
+        title: タイトル
+        date_of_publication: 出版日
+        attachment: 添付ファイル
