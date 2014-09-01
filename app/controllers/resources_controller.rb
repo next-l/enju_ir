@@ -1,4 +1,6 @@
 class ResourcesController < ApplicationController
+  load_and_authorize_resource except: :index
+  authorize_resource only: :index
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
   # GET /resources
@@ -36,7 +38,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to @resource, notice: 'Resource was successfully created.' }
+        format.html { redirect_to @resource, notice: t('controller.successfully_created', model: t('activemodel.models.resource')) }
         format.json { render :show, status: :created, location: @resource }
       else
         format.html { render :new }
@@ -51,7 +53,7 @@ class ResourcesController < ApplicationController
     @resource.attachment.content = params[:resource][:attachment]
     respond_to do |format|
       if @resource.update(resource_params)
-        format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
+        format.html { redirect_to @resource, notice: t('controller.successfully_updated', model: t('activemodel.models.resource')) }
         format.json { render :show, status: :ok, location: @resource }
       else
         format.html { render :edit }
@@ -65,7 +67,7 @@ class ResourcesController < ApplicationController
   def destroy
     @resource.destroy
     respond_to do |format|
-      format.html { redirect_to resources_url, notice: 'Resource was successfully destroyed.' }
+      format.html { redirect_to resources_url, notice: t('controller.successfully_deleted', model: t('activemodel.models.resource')) }
       format.json { head :no_content }
     end
   end
