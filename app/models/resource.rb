@@ -31,6 +31,11 @@ class Resource < ActiveFedora::Base
   #   return solr_document
   # end
 
+  settings do
+    mappings dynamic: 'false' do
+      indexes :title, analyzer: 'cjk'
+    end
+  end
   after_save    { logger.debug ["Updating document... ", __elasticsearch__.index_document ].join }
   after_destroy { logger.debug ["Deleting document... ", __elasticsearch__.delete_document].join }
 end
