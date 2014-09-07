@@ -58,6 +58,6 @@
     <li><%= link_to t('page.edit'), edit_resource_path(@resource) %></li>
     <li><%= link_to t('page.back'), resources_path %></li>
     <li><%= link_to 'RDF', resource_path(@resource, format: :nt) %></li>
-    <li><a href='http://localhost:8080/fedora/oai?verb=Identify'>OAI-PMH</a></li>
+    <li><a href="<%= Setting.fedora.base_url %>/oai?verb=Identify">OAI-PMH</a></li>
   </ul>
 </div>
