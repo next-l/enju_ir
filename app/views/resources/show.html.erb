@@ -8,14 +8,47 @@
 </p>
 
 <p>
+  <strong><%= t('activemodel.attributes.resource.author') %></strong>
+  <%= @resource.author %>
+</p>
+
+<p>
+  <strong><%= t('activemodel.attributes.resource.publisher') %></strong>
+  <%= @resource.publisher %>
+</p>
+
+<p>
+  <strong><%= t('activemodel.attributes.resource.created') %></strong>
+  <%= @resource.created %>
+</p>
+
+<p>
   <strong><%= t('activemodel.attributes.resource.date_of_publication') %></strong>
   <%= @resource.date_of_publication %>
 </p>
 
+<!--
+<p>
+  <strong><%= t('activemodel.attributes.resource.subject') %></strong>
+  <%# @resource.subject %>
+  </p>
+-->
+
+<p>
+  <strong><%= t('activemodel.attributes.resource.thumbnail') %></strong>
+  <br />
+  <%= image_tag url_for_thumbnail(@resource) %>
+</p>
+
 <p>
   <strong><%= t('activemodel.attributes.resource.attachment') %></strong>
-  <%= link_to_attachment(@resource) %>
+  <%= link_to 'download', url_for_attachment(@resource) %>
 </p>
+
+<% case @resource.datastreams['attachment'].mimeType %>
+<% when 'video/mp4' %>
+  <video src="<%= url_for_attachment(@resource) %>" controls autoplay height="360" width="640" />
+<% end %>
 
 </div>
 </div>
@@ -24,5 +57,7 @@
   <ul>
     <li><%= link_to t('page.edit'), edit_resource_path(@resource) %></li>
     <li><%= link_to t('page.back'), resources_path %></li>
+    <li><%= link_to 'RDF', resource_path(@resource, format: :nt) %></li>
+    <li><a href='http://localhost:8080/fedora/oai?verb=Identify'>OAI-PMH</a></li>
   </ul>
 </div>

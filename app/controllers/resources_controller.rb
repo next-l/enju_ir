@@ -20,6 +20,11 @@ class ResourcesController < ApplicationController
   # GET /resources/1
   # GET /resources/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @resource }
+      format.nt { send_data(@resource.dump(:ntriples), type: 'text/plain', disposition: 'inline')  }
+    end
   end
 
   # GET /resources/new
@@ -35,6 +40,8 @@ class ResourcesController < ApplicationController
   # POST /resources.json
   def create
     @resource = Resource.new(resource_params)
+    @resource.attachment.content = params[:resource][:attachment]
+    @resource.thumbnail.content = params[:resource][:thumbnail]
 
     respond_to do |format|
       if @resource.save
@@ -51,6 +58,7 @@ class ResourcesController < ApplicationController
   # PATCH/PUT /resources/1.json
   def update
     @resource.attachment.content = params[:resource][:attachment]
+    @resource.thumbnail.content = params[:resource][:thumbnail]
     respond_to do |format|
       if @resource.update(resource_params)
         format.html { redirect_to @resource, notice: t('controller.successfully_updated', model: t('activemodel.models.resource')) }
@@ -81,7 +89,7 @@ class ResourcesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
       params.require(:resource).permit(
-        :title, :date_of_publication
+        :title, :date_of_publication, :author, :publisher, :subject
       )
     end
 end

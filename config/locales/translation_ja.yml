@@ -8,5 +8,10 @@ ja:
     attributes:
       resource:
         title: タイトル
+        author: 著者
+        publisher: 出版者
         date_of_publication: 出版日
-        attachment: 添付ファイル
+        attachment: 内容ファイル
+        thumbnail: サムネイル
+        created: 作成日
+        subject: 件名
