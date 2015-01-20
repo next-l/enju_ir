@@ -18,9 +18,11 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.2"
-  s.add_dependency "active-fedora", "~> 9.0.0.beta8"
+  s.add_dependency "active-fedora", "~> 9.0.0.rc3"
   s.add_dependency "elasticsearch-model"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails", "~> 3.1"
+  s.add_development_dependency "redis-rails"
+  s.add_development_dependency "resque-scheduler", "~> 3.1"
 end
