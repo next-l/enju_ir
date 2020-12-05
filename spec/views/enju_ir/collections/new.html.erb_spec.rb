@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "collections/new", type: :view do
+RSpec.describe "enju_ir/collections/new", type: :view do
   before(:each) do
-    assign(:collection, Collection.new(
+    assign(:collection, EnjuIr::Collection.new(
       title_translations: "",
       user: nil
     ))
@@ -11,7 +11,7 @@ RSpec.describe "collections/new", type: :view do
   it "renders new collection form" do
     render
 
-    assert_select "form[action=?][method=?]", collections_path, "post" do
+    assert_select "form[action=?][method=?]", enju_ir.collections_path, "post" do
 
       assert_select "input[name=?]", "collection[title_translations]"
 

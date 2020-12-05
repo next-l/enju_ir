@@ -1,10 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "collections/show", type: :view do
+RSpec.describe "enju_ir/collections/show", type: :view do
+  fixtures :all
+
   before(:each) do
     @collection = assign(:collection, EnjuIr::Collection.create!(
       title_translations: "",
-      user: nil
+      user: users(:user1)
     ))
   end
 

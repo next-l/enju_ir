@@ -42,7 +42,7 @@ module EnjuIr
 
     describe "GET /new" do
       it "renders a successful response" do
-        get new_collection_url
+        get enju_ir.new_collection_url
         expect(response).to be_successful
       end
     end

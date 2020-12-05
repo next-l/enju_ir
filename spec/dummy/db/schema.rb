@@ -319,16 +319,6 @@ ActiveRecord::Schema.define(version: 2020_12_05_034517) do
     t.index ["enju_ir_dataset_id"], name: "index_enju_ir_filesets_on_enju_ir_dataset_id"
   end
 
-  create_table "enju_ir_import_requests", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "doi_record_id", null: false
-    t.string "doi_string"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["doi_record_id"], name: "index_enju_ir_import_requests_on_doi_record_id"
-    t.index ["user_id"], name: "index_enju_ir_import_requests_on_user_id"
-  end
-
   create_table "form_of_works", force: :cascade do |t|
     t.string "name", null: false
     t.text "note", comment: "備考"
@@ -1085,8 +1075,6 @@ ActiveRecord::Schema.define(version: 2020_12_05_034517) do
   add_foreign_key "enju_ir_collections", "users"
   add_foreign_key "enju_ir_datasets", "manifestations"
   add_foreign_key "enju_ir_filesets", "enju_ir_datasets"
-  add_foreign_key "enju_ir_import_requests", "doi_records"
-  add_foreign_key "enju_ir_import_requests", "users"
   add_foreign_key "identifiers", "identifier_types"
   add_foreign_key "identifiers", "manifestations"
   add_foreign_key "import_requests", "manifestations"

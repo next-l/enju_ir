@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DatsetPolicy, type: :policy do
+RSpec.describe EnjuIr::DatasetPolicy, type: :policy do
   let(:user) { User.new }
 
   subject { described_class }

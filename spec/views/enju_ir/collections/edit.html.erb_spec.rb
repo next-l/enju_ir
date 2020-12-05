@@ -1,17 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe "collections/edit", type: :view do
+RSpec.describe "enju_ir/collections/edit", type: :view do
+  fixtures :all
+
   before(:each) do
-    @collection = assign(:collection, Collection.create!(
+    @collection = assign(:collection, EnjuIr::Collection.create!(
       title_translations: "",
-      user: nil
+      user: users(:user1)
     ))
   end
 
   it "renders the edit collection form" do
     render
 
-    assert_select "form[action=?][method=?]", collection_path(@collection), "post" do
+    assert_select "form[action=?][method=?]", enju_ir.collection_path(@collection), "post" do
 
       assert_select "input[name=?]", "collection[title_translations]"
 

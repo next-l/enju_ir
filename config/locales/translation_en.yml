@@ -5,6 +5,6 @@ en:
       enju_ir/fileset: Fileset
 
     attributes:
-      enju_ir/import_request:
+      enju_ir/dataset:
         doi_string: DOI
         updated_files: Files

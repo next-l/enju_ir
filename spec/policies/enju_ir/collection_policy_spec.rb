@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CollectionPolicy, type: :policy do
+RSpec.describe EnjuIr::CollectionPolicy, type: :policy do
   let(:user) { User.new }
 
   subject { described_class }
