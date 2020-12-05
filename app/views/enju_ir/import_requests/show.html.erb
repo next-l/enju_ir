@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @import_request.user %>
+</p>
+
+<p>
+  <strong>Doi record:</strong>
+  <%= @import_request.doi_record %>
+</p>
+
+<p>
+  <strong>Doi string:</strong>
+  <%= @import_request.doi_string %>
+</p>
+
+<%= link_to 'Edit', edit_import_request_path(@import_request) %> |
+<%= link_to 'Back', import_requests_path %>

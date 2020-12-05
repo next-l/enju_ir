@@ -1,0 +1,22 @@
+<%= form_with(model: fileset, local: true) do |form| %>
+  <% if fileset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(fileset.errors.count, "error") %> prohibited this fileset from being saved:</h2>
+
+      <ul>
+      <% fileset.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :enju_ir_dataset_id %>
+    <%= form.text_field :enju_ir_dataset_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

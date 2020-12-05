@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Filesets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Enju ir dataset</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @filesets.each do |fileset| %>
+      <tr>
+        <td><%= fileset.enju_ir_dataset %></td>
+        <td><%= link_to 'Show', fileset %></td>
+        <td><%= link_to 'Edit', edit_fileset_path(fileset) %></td>
+        <td><%= link_to 'Destroy', fileset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fileset', new_fileset_path %>
