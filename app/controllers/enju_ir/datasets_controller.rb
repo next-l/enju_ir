@@ -6,7 +6,7 @@ module EnjuIr
 
     # GET /datasets
     def index
-      @datasets = Dataset.all
+      @datasets = Dataset.page(params[:page])
     end
 
     # GET /datasets/1
@@ -15,7 +15,7 @@ module EnjuIr
 
     # GET /datasets/new
     def new
-      @dataset = Dataset.new
+      @dataset = Dataset.new(doi_string: params[:doi])
     end
 
     # GET /datasets/1/edit
@@ -25,8 +25,11 @@ module EnjuIr
     # POST /datasets
     def create
       @dataset = Dataset.new(dataset_params)
+      doi_record = DoiRecord.find_by(body: @dataset.doi_string.to_s.downcase)
+      @dataset.manifestation = doi_record&.manifestation
 
       if @dataset.save
+        attach
         redirect_to @dataset, notice: 'Dataset was successfully created.'
       else
         render :new
@@ -57,7 +60,21 @@ module EnjuIr
 
       # Only allow a trusted parameter "white list" through.
       def dataset_params
-        params.require(:dataset).permit(:json_attributes)
+        params.require(:dataset).permit(:title, :doi_string, :uploaded_files)
       end
+
+      def filtered_params
+        params.permit([:q, :format, :page])
+      end
+
+      def attach
+        params[:dataset][:uploaded_files].each do |file|
+          fileset = @dataset.enju_ir_filesets.new
+          fileset.attachment.attach(file)
+          fileset.save!
+        end
+      end
+
+      helper_method :filtered_params
   end
 end

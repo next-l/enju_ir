@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      enju_ir/dataset: Dataset
+      enju_ir/fileset: Fileset
+
+    attributes:
+      enju_ir/import_request:
+        doi_string: DOI
+        updated_files: Files

@@ -15,7 +15,7 @@ module EnjuIr
 
     # GET /import_requests/new
     def new
-      @import_request = ImportRequest.new
+      @import_request = ImportRequest.new(doi_string: params[:doi])
     end
 
     # GET /import_requests/1/edit
@@ -25,6 +25,8 @@ module EnjuIr
     # POST /import_requests
     def create
       @import_request = ImportRequest.new(import_request_params)
+      @import_request.user = current_user
+      @import_request.doi_record = DoiRecord.find_by(body: @import_request.doi_string.to_s.downcase)
 
       if @import_request.save
         redirect_to @import_request, notice: 'Import request was successfully created.'
@@ -58,5 +60,11 @@ module EnjuIr
       def import_request_params
         params.require(:import_request).permit(:doi_string)
       end
+
+      def filtered_params
+        params.permit([:q, :format, :page])
+      end
+
+      helper_method :filtered_params
   end
 end

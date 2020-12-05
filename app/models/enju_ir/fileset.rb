@@ -1,7 +1,7 @@
 module EnjuIr
   class Fileset < ApplicationRecord
     belongs_to :enju_ir_dataset, class_name: 'EnjuIr::Dataset'
-    has_many_attached :attachments
+    has_one_attached :attachment
   end
 end
 

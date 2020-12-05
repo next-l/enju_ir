@@ -1,12 +1,14 @@
 module EnjuIr
   class Dataset < ApplicationRecord
     belongs_to :manifestation
-    has_many :enju_ir_filesets, class_name: 'EnjuIr::Fileset', dependent: :destroy
+    has_many :enju_ir_filesets, class_name: 'EnjuIr::Fileset', foreign_key: :enju_ir_dataset_id, dependent: :destroy
 
     include AttrJson::Record
     include AttrJson::NestedAttributes
     attr_json :title, :string
     attr_json :description, :string
+
+    attr_accessor :doi_string, :uploaded_files
 
     searchable do
       text :title

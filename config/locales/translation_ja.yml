@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      enju_ir/dataset: データセット
+      enju_ir/fileset: ファイルセット
+
+    attributes:
+      enju_ir/dataset:
+        doi_string: DOI
+        updated_files: ファイル
