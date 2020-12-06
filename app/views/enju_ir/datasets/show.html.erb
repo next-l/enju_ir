@@ -1,14 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Json attributes:</strong>
-  <%= @dataset.json_attributes %>
-</p>
-
-<p>
   <strong>Manifestation:</strong>
-  <%= @dataset.manifestation %>
+  <%= link_to @dataset.manifestation.original_title, main_app.manifestation_path(@dataset.manifestation) %>
 </p>
 
-<%= link_to 'Edit', edit_dataset_path(@dataset) %> |
-<%= link_to 'Back', datasets_path %>
+<%= link_to t('page.edit'), edit_dataset_path(@dataset) %> |
+<%= link_to t('page.back'), datasets_path %>

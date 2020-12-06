@@ -17,25 +17,27 @@ module EnjuIr
     # Collection. As you add validations to Collection, be sure to
     # adjust the attributes here as well.
     let(:valid_attributes) {
-      skip("Add a hash of attributes valid for your model")
+      FactoryBot.attributes_for(:collection)
     }
 
     let(:invalid_attributes) {
       skip("Add a hash of attributes invalid for your model")
     }
 
+    fixtures :all
+
     describe "GET /index" do
       it "renders a successful response" do
-        Collection.create! valid_attributes
-        get collections_url
+        FactoryBot.create(:collection)
+        get enju_ir.collections_url
         expect(response).to be_successful
       end
     end
 
     describe "GET /show" do
       it "renders a successful response" do
-        collection = Collection.create! valid_attributes
-        get collection_url(collection)
+        collection = FactoryBot.create(:collection)
+        get enju_ir.collection_url(collection)
         expect(response).to be_successful
       end
     end
@@ -49,14 +51,18 @@ module EnjuIr
 
     describe "GET /edit" do
       it "render a successful response" do
-        collection = Collection.create! valid_attributes
-        get edit_collection_url(collection)
+        collection = FactoryBot.create(:collection)
+        get enju_ir.edit_collection_url(collection)
         expect(response).to be_successful
       end
     end
 
     describe "POST /create" do
       context "with valid parameters" do
+        before(:each) do
+          sign_in users(:user1)
+        end
+
         it "creates a new Collection" do
           expect {
             post enju_ir.collections_url, params: { collection: valid_attributes }
@@ -65,11 +71,15 @@ module EnjuIr
 
         it "redirects to the created collection" do
           post enju_ir.collections_url, params: { collection: valid_attributes }
-          expect(response).to redirect_to(collection_url(Collection.last))
+          expect(response).to redirect_to(enju_ir.collection_url(Collection.last))
         end
       end
 
       context "with invalid parameters" do
+        before(:each) do
+          sign_in users(:user1)
+        end
+
         it "does not create a new Collection" do
           expect {
             post enju_ir.collections_url, params: { collection: invalid_attributes }
@@ -90,15 +100,15 @@ module EnjuIr
         }
 
         it "updates the requested collection" do
-          collection = Collection.create! valid_attributes
-          patch collection_url(collection), params: { collection: new_attributes }
+          collection = FactoryBot.create(:collection)
+          patch enju_ir.collection_url(collection), params: { collection: new_attributes }
           collection.reload
           skip("Add assertions for updated state")
         end
 
         it "redirects to the collection" do
-          collection = Collection.create! valid_attributes
-          patch collection_url(collection), params: { collection: new_attributes }
+          collection = FactoryBot.create(:collection)
+          patch enju_ir.collection_url(collection), params: { collection: new_attributes }
           collection.reload
           expect(response).to redirect_to(collection_url(collection))
         end
@@ -106,8 +116,8 @@ module EnjuIr
 
       context "with invalid parameters" do
         it "renders a successful response (i.e. to display the 'edit' template)" do
-          collection = Collection.create! valid_attributes
-          patch collection_url(collection), params: { collection: invalid_attributes }
+          collection = FactoryBot.create(:collection)
+          patch enju_ir.collection_url(collection), params: { collection: invalid_attributes }
           expect(response).to be_successful
         end
       end
@@ -115,16 +125,16 @@ module EnjuIr
 
     describe "DELETE /destroy" do
       it "destroys the requested collection" do
-        collection = Collection.create! valid_attributes
+        collection = FactoryBot.create(:collection)
         expect {
-          delete collection_url(collection)
+          delete enju_ir.collection_url(collection)
         }.to change(Collection, :count).by(-1)
       end
 
       it "redirects to the collections list" do
-        collection = Collection.create! valid_attributes
-        delete collection_url(collection)
-        expect(response).to redirect_to(collections_url)
+        collection = FactoryBot.create(:collection)
+        delete enju_ir.collection_url(collection)
+        expect(response).to redirect_to(enju_ir.collections_url)
       end
     end
   end

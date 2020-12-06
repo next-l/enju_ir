@@ -3,8 +3,14 @@ ja:
     models:
       enju_ir/dataset: データセット
       enju_ir/fileset: ファイルセット
+      enju_ir/collection: コレクション
 
     attributes:
       enju_ir/dataset:
+        user_id: ユーザ
+        manifestation_id: 資料
         doi_string: DOI
         updated_files: ファイル
+      enju_ir/collection:
+        user_id: ユーザ
+        title: タイトル

@@ -6,7 +6,7 @@ module EnjuIr
 
     # GET /collections
     def index
-      @collections = Collection.all
+      @collections = Collection.page(params[:page])
     end
 
     # GET /collections/1
@@ -25,6 +25,7 @@ module EnjuIr
     # POST /collections
     def create
       @collection = Collection.new(collection_params)
+      @collection.user = current_user
 
       if @collection.save
         redirect_to @collection, notice: 'Collection was successfully created.'
@@ -56,7 +57,7 @@ module EnjuIr
 
       # Only allow a trusted parameter "white list" through.
       def collection_params
-        params.require(:collection).permit(:title_translations, :user_id)
+        params.require(:collection).permit(:title)
       end
   end
 end

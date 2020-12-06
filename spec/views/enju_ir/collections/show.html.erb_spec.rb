@@ -5,7 +5,7 @@ RSpec.describe "enju_ir/collections/show", type: :view do
 
   before(:each) do
     @collection = assign(:collection, EnjuIr::Collection.create!(
-      title_translations: "",
+      title: "test",
       user: users(:user1)
     ))
   end

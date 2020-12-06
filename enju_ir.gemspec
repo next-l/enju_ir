@@ -50,4 +50,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "cucumber-rails"
   spec.add_development_dependency "sunspot_solr"
   spec.add_development_dependency "resque"
+  spec.add_development_dependency "webmock"
+  spec.add_development_dependency "vcr"
 end

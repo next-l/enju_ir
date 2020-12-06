@@ -3,8 +3,14 @@ en:
     models:
       enju_ir/dataset: Dataset
       enju_ir/fileset: Fileset
+      enju_ir/collection: Collection
 
     attributes:
       enju_ir/dataset:
+        user_id: User
+        manifestation_id: Manifestation
         doi_string: DOI
         updated_files: Files
+      enju_ir/collection:
+        user_id: User
+        title: Title

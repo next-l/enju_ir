@@ -13,10 +13,10 @@
   <tbody>
     <% @filesets.each do |fileset| %>
       <tr>
-        <td><%= fileset.enju_ir_dataset %></td>
-        <td><%= link_to 'Show', fileset %></td>
-        <td><%= link_to 'Edit', edit_fileset_path(fileset) %></td>
-        <td><%= link_to 'Destroy', fileset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fileset.enju_ir_dataset.manifestation.original_title, fileset.enju_ir_dataset %></td>
+        <td><%= link_to t('page.show'), fileset %></td>
+        <td><%= link_to t('page.edit'), edit_fileset_path(fileset) %></td>
+        <td><%= link_to t('page.destroy'), fileset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

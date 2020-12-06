@@ -12,8 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :doi_string %>
+    <%= form.text_field :doi_string %>
+  </div>
+
+  <div class="field">
+    <%= form.label :uploaded_files %>
+    <%= form.file_field :uploaded_files, multiple: true %>
   </div>
 
   <div class="actions">

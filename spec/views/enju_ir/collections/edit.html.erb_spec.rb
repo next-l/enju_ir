@@ -5,7 +5,7 @@ RSpec.describe "enju_ir/collections/edit", type: :view do
 
   before(:each) do
     @collection = assign(:collection, EnjuIr::Collection.create!(
-      title_translations: "",
+      title: "test",
       user: users(:user1)
     ))
   end
@@ -15,9 +15,7 @@ RSpec.describe "enju_ir/collections/edit", type: :view do
 
     assert_select "form[action=?][method=?]", enju_ir.collection_path(@collection), "post" do
 
-      assert_select "input[name=?]", "collection[title_translations]"
-
-      assert_select "input[name=?]", "collection[user_id]"
+      assert_select "input[name=?]", "collection[title]"
     end
   end
 end

@@ -2,7 +2,12 @@
 
 <p>
   <strong>Enju ir dataset:</strong>
-  <%= @fileset.enju_ir_dataset %>
+  <%= link_to @fileset.enju_ir_dataset.manifestation.original_title, @fileset.enju_ir_dataset %>
+</p>
+
+<p>
+  <strong>Checksum:</strong>
+  <%= @fileset.attachment.checksum if @fileset.attachment.attached? %>
 </p>
 
 <%= link_to 'Edit', edit_fileset_path(@fileset) %> |

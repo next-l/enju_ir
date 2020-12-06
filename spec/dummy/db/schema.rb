@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_05_034517) do
+ActiveRecord::Schema.define(version: 2020_12_06_092712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -296,6 +296,15 @@ ActiveRecord::Schema.define(version: 2020_12_05_034517) do
     t.index ["item_id"], name: "index_donates_on_item_id"
   end
 
+  create_table "enju_ir_collection_and_datasets", force: :cascade do |t|
+    t.uuid "enju_ir_collection_id", null: false
+    t.uuid "enju_ir_dataset_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enju_ir_collection_id"], name: "index_enju_ir_collection_and_datasets_on_enju_ir_collection_id"
+    t.index ["enju_ir_dataset_id"], name: "index_enju_ir_collection_and_datasets_on_enju_ir_dataset_id"
+  end
+
   create_table "enju_ir_collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.jsonb "title_translations", default: {}, null: false
     t.bigint "user_id", null: false
@@ -304,12 +313,38 @@ ActiveRecord::Schema.define(version: 2020_12_05_034517) do
     t.index ["user_id"], name: "index_enju_ir_collections_on_user_id"
   end
 
+  create_table "enju_ir_dataset_transitions", force: :cascade do |t|
+    t.string "to_state", null: false
+    t.jsonb "metadata", default: {}
+    t.integer "sort_key", null: false
+    t.uuid "enju_ir_dataset_id", null: false
+    t.boolean "most_recent", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enju_ir_dataset_id", "most_recent"], name: "index_enju_ir_dataset_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["enju_ir_dataset_id", "sort_key"], name: "index_enju_ir_dataset_transitions_parent_sort", unique: true
+  end
+
   create_table "enju_ir_datasets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.jsonb "json_attributes", default: {}, null: false
+    t.bigint "user_id", null: false
     t.bigint "manifestation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["manifestation_id"], name: "index_enju_ir_datasets_on_manifestation_id"
+    t.index ["user_id"], name: "index_enju_ir_datasets_on_user_id"
+  end
+
+  create_table "enju_ir_fileset_transitions", force: :cascade do |t|
+    t.string "to_state", null: false
+    t.jsonb "metadata", default: {}
+    t.integer "sort_key", null: false
+    t.uuid "enju_ir_fileset_id", null: false
+    t.boolean "most_recent", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enju_ir_fileset_id", "most_recent"], name: "index_enju_ir_fileset_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["enju_ir_fileset_id", "sort_key"], name: "index_enju_ir_fileset_transitions_parent_sort", unique: true
   end
 
   create_table "enju_ir_filesets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1072,8 +1107,13 @@ ActiveRecord::Schema.define(version: 2020_12_05_034517) do
   add_foreign_key "doi_records", "manifestations"
   add_foreign_key "donates", "agents"
   add_foreign_key "donates", "items"
+  add_foreign_key "enju_ir_collection_and_datasets", "enju_ir_collections"
+  add_foreign_key "enju_ir_collection_and_datasets", "enju_ir_datasets"
   add_foreign_key "enju_ir_collections", "users"
+  add_foreign_key "enju_ir_dataset_transitions", "enju_ir_datasets"
   add_foreign_key "enju_ir_datasets", "manifestations"
+  add_foreign_key "enju_ir_datasets", "users"
+  add_foreign_key "enju_ir_fileset_transitions", "enju_ir_filesets"
   add_foreign_key "enju_ir_filesets", "enju_ir_datasets"
   add_foreign_key "identifiers", "identifier_types"
   add_foreign_key "identifiers", "manifestations"

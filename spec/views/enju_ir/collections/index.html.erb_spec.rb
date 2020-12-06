@@ -6,11 +6,11 @@ RSpec.describe "enju_ir/collections/index", type: :view do
   before(:each) do
     assign(:collections, [
       EnjuIr::Collection.create!(
-        title_translations: "",
+        title: "test",
         user: users(:user1)
       ),
       EnjuIr::Collection.create!(
-        title_translations: "",
+        title: "test",
         user: users(:user1)
       )
     ])
@@ -18,7 +18,7 @@ RSpec.describe "enju_ir/collections/index", type: :view do
 
   it "renders a list of collections" do
     render
-    assert_select "tr>td", text: "".to_s, count: 2
-    assert_select "tr>td", text: nil.to_s, count: 2
+    assert_select "tr>td", text: "test".to_s, count: 2
+    assert_select "tr>td", text: users(:user1).username, count: 2
   end
 end

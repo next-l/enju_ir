@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :collection, class: EnjuIr::Collection do
+    association :user
     sequence(:title){|n| "title_#{n}"}
   end
 end

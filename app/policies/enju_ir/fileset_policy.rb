@@ -11,7 +11,7 @@ module EnjuIr
     end
 
     def show?
-      true
+      DatasetPolicy.new(user, record.enju_ir_dataset).show?
     end
 
     def create?
@@ -19,11 +19,11 @@ module EnjuIr
     end
 
     def update?
-      true
+      DatasetPolicy.new(user, record.enju_ir_dataset).update?
     end
 
     def destroy?
-      true
+      update?
     end
   end
 end

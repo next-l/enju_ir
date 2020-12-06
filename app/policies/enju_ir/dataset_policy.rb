@@ -19,11 +19,11 @@ module EnjuIr
     end
 
     def update?
-      true
+      return true if user == record.user
     end
 
     def destroy?
-      true
+      update?
     end
   end
 end
