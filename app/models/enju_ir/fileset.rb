@@ -1,8 +1,8 @@
 module EnjuIr
   class Fileset < ApplicationRecord
     belongs_to :enju_ir_dataset, class_name: 'EnjuIr::Dataset'
-    has_many :enju_ir_fileset_transitions, autosave: false
-    has_one_attached :attachment
+    has_many :enju_ir_fileset_transitions, autosave: false, class_name: 'EnjuIr::FilesetTransition'
+has_one_attached :attachment
 
     include Statesman::Adapters::ActiveRecordQueries[
       transition_class: FilesetTransition,
