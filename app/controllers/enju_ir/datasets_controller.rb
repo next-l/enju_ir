@@ -27,6 +27,7 @@ module EnjuIr
       @dataset = Dataset.new(dataset_params)
       doi_record = DoiRecord.find_by(body: @dataset.doi_string.to_s.downcase)
       @dataset.manifestation = doi_record&.manifestation
+      @dataset.user = current_user
 
       if @dataset.save
         attach

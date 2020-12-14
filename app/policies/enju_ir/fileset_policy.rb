@@ -15,7 +15,7 @@ module EnjuIr
     end
 
     def create?
-      true
+      DatasetPolicy.new(user, record.enju_ir_dataset).create?
     end
 
     def update?

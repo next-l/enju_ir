@@ -10,5 +10,5 @@
   <%= @fileset.attachment.checksum if @fileset.attachment.attached? %>
 </p>
 
-<%= link_to 'Edit', edit_fileset_path(@fileset) %> |
-<%= link_to 'Back', filesets_path %>
+<%= link_to t('page.edit'), edit_fileset_path(@fileset) %> |
+<%= link_to t('page.back'), filesets_path %>

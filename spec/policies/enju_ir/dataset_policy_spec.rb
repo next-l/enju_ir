@@ -23,7 +23,13 @@ RSpec.describe EnjuIr::DatasetPolicy, type: :policy do
   end
 
   permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows access if logged in" do
+      expect(subject).to permit(users(:user1), EnjuIr::Dataset)
+    end
+
+    it "denies access if not logged in" do
+      expect(subject).not_to permit(nil, EnjuIr::Dataset)
+    end
   end
 
   permissions :update? do

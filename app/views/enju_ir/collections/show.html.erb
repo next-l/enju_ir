@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title translations:</strong>
-  <%= @collection.title_translations %>
+  <strong>Title:</strong>
+  <%= @collection.title %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @collection.user %>
+  <%= @collection.user.username %>
 </p>
 
-<%= link_to 'Edit', edit_collection_path(@collection) %> |
-<%= link_to 'Back', collections_path %>
+<%= link_to t('page.edit'), edit_collection_path(@collection) %> |
+<%= link_to t('page.back'), collections_path %>

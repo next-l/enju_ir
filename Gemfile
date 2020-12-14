@@ -18,3 +18,6 @@ gem 'enju_leaf', github: 'next-l/enju_leaf'
 gem 'enju_library', github: 'next-l/enju_library'
 gem 'enju_biblio', github: 'next-l/enju_biblio'
 gem 'webpacker'
+gem 'ro-crate-ruby', git: 'https://github.com/ResearchObject/ro-crate-ruby.git', require: 'ro_crate_ruby'
+
+gem 'rails', '~> 6.0.3'

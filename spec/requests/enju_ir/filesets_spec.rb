@@ -17,14 +17,20 @@ module EnjuIr
     # Fileset. As you add validations to Fileset, be sure to
     # adjust the attributes here as well.
     let(:valid_attributes) {
-      skip("Add a hash of attributes valid for your model")
+      { enju_ir_dataset_id: FactoryBot.create(:dataset).id }
     }
 
     let(:invalid_attributes) {
       skip("Add a hash of attributes invalid for your model")
     }
 
+    fixtures :all
+
     describe "GET /index" do
+      before(:each) do
+        sign_in users(:librarian1)
+      end
+
       it "renders a successful response" do
         Fileset.create! valid_attributes
         get enju_ir.filesets_url
@@ -33,6 +39,10 @@ module EnjuIr
     end
 
     describe "GET /show" do
+      before(:each) do
+        sign_in users(:librarian1)
+      end
+
       it "renders a successful response" do
         fileset = Fileset.create! valid_attributes
         get enju_ir.fileset_url(fileset)
@@ -41,6 +51,10 @@ module EnjuIr
     end
 
     describe "GET /new" do
+      before(:each) do
+        sign_in users(:librarian1)
+      end
+
       it "renders a successful response" do
         get enju_ir.new_fileset_url
         expect(response).to be_successful
@@ -48,14 +62,22 @@ module EnjuIr
     end
 
     describe "GET /edit" do
+      before(:each) do
+        sign_in users(:librarian1)
+      end
+
       it "render a successful response" do
         fileset = Fileset.create! valid_attributes
-        get edit_fileset_url(fileset)
+        get enju_ir.edit_fileset_url(fileset)
         expect(response).to be_successful
       end
     end
 
     describe "POST /create" do
+      before(:each) do
+        sign_in users(:librarian1)
+      end
+
       context "with valid parameters" do
         it "creates a new Fileset" do
           expect {
@@ -65,7 +87,7 @@ module EnjuIr
 
         it "redirects to the created fileset" do
           post enju_ir.filesets_url, params: { fileset: valid_attributes }
-          expect(response).to redirect_to(fileset_url(Fileset.last))
+          expect(response).to redirect_to(enju_ir.fileset_url(Fileset.last))
         end
       end
 
@@ -84,6 +106,10 @@ module EnjuIr
     end
 
     describe "PATCH /update" do
+      before(:each) do
+        sign_in users(:librarian1)
+      end
+
       context "with valid parameters" do
         let(:new_attributes) {
           skip("Add a hash of attributes valid for your model")
@@ -91,40 +117,44 @@ module EnjuIr
 
         it "updates the requested fileset" do
           fileset = Fileset.create! valid_attributes
-          patch fileset_url(fileset), params: { fileset: new_attributes }
+          patch enju_ir.fileset_url(fileset), params: { fileset: new_attributes }
           fileset.reload
           skip("Add assertions for updated state")
         end
 
         it "redirects to the fileset" do
           fileset = Fileset.create! valid_attributes
-          patch fileset_url(fileset), params: { fileset: new_attributes }
+          patch enju_ir.fileset_url(fileset), params: { fileset: new_attributes }
           fileset.reload
-          expect(response).to redirect_to(fileset_url(fileset))
+          expect(response).to redirect_to(enju_ir.fileset_url(fileset))
         end
       end
 
       context "with invalid parameters" do
         it "renders a successful response (i.e. to display the 'edit' template)" do
           fileset = Fileset.create! valid_attributes
-          patch fileset_url(fileset), params: { fileset: invalid_attributes }
+          patch enju_ir.fileset_url(fileset), params: { fileset: invalid_attributes }
           expect(response).to be_successful
         end
       end
     end
 
     describe "DELETE /destroy" do
+      before(:each) do
+        sign_in users(:librarian1)
+      end
+
       it "destroys the requested fileset" do
         fileset = Fileset.create! valid_attributes
         expect {
-          delete fileset_url(fileset)
+          delete enju_ir.fileset_url(fileset)
         }.to change(Fileset, :count).by(-1)
       end
 
       it "redirects to the filesets list" do
         fileset = Fileset.create! valid_attributes
-        delete fileset_url(fileset)
-        expect(response).to redirect_to(filesets_url)
+        delete enju_ir.fileset_url(fileset)
+        expect(response).to redirect_to(enju_ir.filesets_url)
       end
     end
   end

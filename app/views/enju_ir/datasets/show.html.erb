@@ -5,5 +5,15 @@
   <%= link_to @dataset.manifestation.original_title, main_app.manifestation_path(@dataset.manifestation) %>
 </p>
 
+<p>
+  <strong>Fileset:</strong>
+</p>
+
+<ul>
+  <% @dataset.enju_ir_filesets.each do |fileset| %>
+    <li><%= link_to fileset.attachment.filename, rails_blob_path(fileset.attachment) %></li>
+  <% end %>
+</ul>
+
 <%= link_to t('page.edit'), edit_dataset_path(@dataset) %> |
 <%= link_to t('page.back'), datasets_path %>

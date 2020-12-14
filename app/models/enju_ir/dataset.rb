@@ -6,6 +6,7 @@ module EnjuIr
     has_many :enju_ir_collection_and_datasets, class_name: 'EnjuIr::CollectionAndDataset', foreign_key: :enju_ir_dataset_id, dependent: :destroy
     has_many :enju_ir_collections, class_name: 'EnjuIr::Collection', through: :enju_ir_collection_and_datasets, dependent: :destroy
     has_many :enju_ir_dataset_transitions, autosave: false, class_name: 'EnjuIr::DatasetTransition'
+    has_one_attached :attachment
 
     include AttrJson::Record
     include AttrJson::NestedAttributes
