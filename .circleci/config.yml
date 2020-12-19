@@ -26,6 +26,9 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
       - checkout
 
       # Download and cache dependencies

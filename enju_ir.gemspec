@@ -25,15 +25,10 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails", ">= 5.2.4.4"
   spec.add_dependency "attr_json"
   spec.add_dependency "jquery-rails"
   spec.add_dependency "cocoon"
-  spec.add_dependency "kaminari"
-  spec.add_dependency "statesman"
   spec.add_dependency "faraday"
-  spec.add_dependency "builder"
-  spec.add_dependency "pundit"
   spec.add_dependency "paper_trail"
 
   spec.add_development_dependency "pg"
@@ -48,7 +43,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sassc-rails"
   spec.add_development_dependency "annotate"
   spec.add_development_dependency "cucumber-rails"
-  spec.add_development_dependency "sunspot_solr"
   spec.add_development_dependency "resque"
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "vcr"
