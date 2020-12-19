@@ -10,7 +10,7 @@ jobs:
          environment:
            PGHOST: 127.0.0.1
            PGUSER: postgres
-           SOLR_URL: http://localhost:8983/solr/test
+           SOLR_URL: http://solr:8983/solr/test
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -20,7 +20,7 @@ jobs:
            POSTGRES_USER: postgres
            POSTGRES_DB: enju_leaf_dummy_test
        - image: projectnextl/enju-solr:0.1
-         name: localhost
+         name: solr
 
     executor: ruby/default
     working_directory: ~/repo
@@ -52,7 +52,9 @@ jobs:
       - run:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          command: docker run enju-solr:0.1 solr-precreate test /tmp/configsets/sunspot/conf
+          command: |
+            docker run -d --name solr enju-solr:0.1
+            docker run solr solr-precreate test /tmp/configsets/sunspot/conf
       - run: bundle exec rake db:test:prepare
       - run: yarn install
       - run: spec/dummy/bin/yarn install
