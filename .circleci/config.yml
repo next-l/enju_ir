@@ -48,10 +48,12 @@ jobs:
       # Database setup
       - run:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      -run:
+          command: docker run enju-solr:0.1 solr-precreate test /tmp/configsets/sunspot/conf
       - run: bundle exec rake db:test:prepare
       - run: yarn install
       - run: spec/dummy/bin/yarn install
-      - run: spec/dummy/bin/webpack
+      # - run: spec/dummy/bin/webpack
 
       # run tests!
       - run:
