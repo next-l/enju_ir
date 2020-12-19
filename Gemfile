@@ -20,4 +20,9 @@ gem 'enju_biblio', github: 'next-l/enju_biblio'
 gem 'webpacker'
 gem 'ro-crate-ruby', git: 'https://github.com/ResearchObject/ro-crate-ruby.git', require: 'ro_crate_ruby'
 
+group :test do
+  gem 'rails-controller-testing'
+  gem 'rspec_junit_formatter'
+end
+
 gem 'rails', '~> 6.0.3'
