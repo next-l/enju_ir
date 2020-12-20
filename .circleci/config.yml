@@ -20,7 +20,7 @@ jobs:
            POSTGRES_USER: postgres
            POSTGRES_DB: enju_leaf_dummy_test
        - image: projectnextl/enju-solr:0.2
-          name: solr
+         name: solr
 
     executor: ruby/default
     working_directory: ~/repo
