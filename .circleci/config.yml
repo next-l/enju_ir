@@ -20,7 +20,7 @@ jobs:
            POSTGRES_USER: postgres
            POSTGRES_DB: enju_leaf_dummy_test
        - image: projectnextl/enju-solr:latest
-         command: [solr-precreate enju_leaf /opt/solr/server/solr/configsets/sunspot]
+         command: [script/solr-precreate enju_leaf /opt/solr/server/solr/configsets/sunspot]
 
     executor: ruby/default
     working_directory: ~/repo
