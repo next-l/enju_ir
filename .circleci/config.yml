@@ -51,9 +51,11 @@ jobs:
       - run:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          command: dockerize -wait tcp://localhost:8983 -timeout 1m
+          command: |
+            docker run -d --name solr -p 8983:8983 projectnextl/enju-solr:0.2
+            docker exec -it solr solr create -c test -d /opt/solr/server/solr/configsets/sunspot
       - run:
-          command: docker exec -it solr solr create -c test -d /opt/solr/server/solr/configsets/sunspot
+          command: dockerize -wait tcp://localhost:8983 -timeout 1m
       - run: bundle exec rake db:test:prepare
       - run: yarn install
       - run: spec/dummy/bin/yarn install
