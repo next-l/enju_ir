@@ -1,4 +1,5 @@
 require 'attr_json'
+require 'fast_jsonapi'
 
 module EnjuIr
   class Engine < ::Rails::Engine

@@ -27,6 +27,26 @@ module EnjuIr
     def state_machine
       @state_machine ||= DatasetStateMachine.new(self, transition_class: DatasetTransition)
     end
+
+    def register_doi
+      data = EnjuIr::Datacite.new
+      data.id = id
+      data.event = 'register'
+
+      uri = URI.parse(ENV['DATACITE_API_URL'] || 'https://api.test.datacite.org/dois')
+      request = Net::HTTP::Post.new(uri)
+      request.basic_auth(ENV['YOUR_CLIENT_ID'], ENV['YOUR_PASSWORD'])
+      request.content_type = "application/vnd.api+json"
+      request.body = EnjuIr::DataciteSerializer.new(data).serializable_hash.to_json
+
+      req_options = {
+        use_ssl: true
+      }
+
+      Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+      end
+    end
   end
 end
 

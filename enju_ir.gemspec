@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "attr_json"
   spec.add_dependency "jquery-rails"
   spec.add_dependency "paper_trail"
+  spec.add_dependency "jsonapi-serializer"
 
   spec.add_development_dependency "pg"
   spec.add_development_dependency "devise"
