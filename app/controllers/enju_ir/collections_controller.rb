@@ -6,6 +6,7 @@ module EnjuIr
 
     # GET /collections
     def index
+      authorize Collection
       @collections = Collection.page(params[:page])
     end
 
@@ -15,6 +16,7 @@ module EnjuIr
 
     # GET /collections/new
     def new
+      authorize Collection
       @collection = Collection.new
     end
 
@@ -24,6 +26,7 @@ module EnjuIr
 
     # POST /collections
     def create
+      authorize Collection
       @collection = Collection.new(collection_params)
       @collection.user = current_user
 
@@ -53,6 +56,7 @@ module EnjuIr
       # Use callbacks to share common setup or constraints between actions.
       def set_collection
         @collection = Collection.find(params[:id])
+        authorize @collection
       end
 
       # Only allow a trusted parameter "white list" through.

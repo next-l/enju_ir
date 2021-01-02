@@ -28,17 +28,33 @@ module EnjuIr
       @state_machine ||= DatasetStateMachine.new(self, transition_class: DatasetTransition)
     end
 
-    def register_doi
+    def attach_file(uploaded_files)
+      return if uploaded_files.blank?
+
+      uploaded_files.each do |file|
+        fileset = @dataset.enju_ir_filesets.new
+        fileset.attachment.attach(file)
+        fileset.save!
+      end
+    end
+
+    def register_doi(options = {status: 'register'})
+      base_url = ENV.fetch('DATACITE_API_URL', 'https://api.test.datacite.org')
       data = EnjuIr::Datacite.new
-      data.id = id
-      data.event = 'register'
+      data.event = options[:status]
 
-      uri = URI.parse(ENV['DATACITE_API_URL'] || 'https://api.test.datacite.org/dois')
-      request = Net::HTTP::Post.new(uri)
-      request.basic_auth(ENV['YOUR_CLIENT_ID'], ENV['YOUR_PASSWORD'])
-      request.content_type = "application/vnd.api+json"
+      if manifestation.doi_record
+        uri = URI.parse("#{base_url}/dois/#{manifestation.doi_record.body}")
+        request = Net::HTTP::Put.new(uri)
+      else
+        data.id = "#{ENV['ENJU_IR_DOI_PREFIX']}/#{id}"
+        uri = URI.parse("#{base_url}/dois")
+        request = Net::HTTP::Post.new(uri)
+      end
+
       request.body = EnjuIr::DataciteSerializer.new(data).serializable_hash.to_json
-
+      request.content_type = "application/vnd.api+json"
+      request.basic_auth(ENV['YOUR_CLIENT_ID'], ENV['YOUR_PASSWORD'])
       req_options = {
         use_ssl: true
       }

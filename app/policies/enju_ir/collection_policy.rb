@@ -15,7 +15,7 @@ module EnjuIr
     end
 
     def create?
-      true
+      return true if user
     end
 
     def update?

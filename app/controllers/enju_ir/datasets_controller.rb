@@ -6,6 +6,7 @@ module EnjuIr
 
     # GET /datasets
     def index
+      authorize Dataset
       @datasets = Dataset.page(params[:page])
     end
 
@@ -15,6 +16,7 @@ module EnjuIr
 
     # GET /datasets/new
     def new
+      authorize Dataset
       @dataset = Dataset.new(doi_string: params[:doi])
     end
 
@@ -24,13 +26,14 @@ module EnjuIr
 
     # POST /datasets
     def create
+      authorize Dataset
       @dataset = Dataset.new(dataset_params)
       doi_record = DoiRecord.find_by(body: @dataset.doi_string.to_s.downcase)
       @dataset.manifestation = doi_record&.manifestation
       @dataset.user = current_user
 
       if @dataset.save
-        attach
+        @dataset.attach_file(params[:dataset][:uploaded_files])
         redirect_to @dataset, notice: 'Dataset was successfully created.'
       else
         render :new
@@ -66,14 +69,6 @@ module EnjuIr
 
       def filtered_params
         params.permit([:q, :format, :page])
-      end
-
-      def attach
-        params[:dataset][:uploaded_files].each do |file|
-          fileset = @dataset.enju_ir_filesets.new
-          fileset.attachment.attach(file)
-          fileset.save!
-        end
       end
 
       helper_method :filtered_params

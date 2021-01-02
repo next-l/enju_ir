@@ -6,6 +6,7 @@ module EnjuIr
 
     # GET /filesets
     def index
+      authorize Fileset
       @filesets = Fileset.all
     end
 
@@ -15,6 +16,7 @@ module EnjuIr
 
     # GET /filesets/new
     def new
+      authorize Fileset
       @fileset = Fileset.new
     end
 
@@ -24,6 +26,7 @@ module EnjuIr
 
     # POST /filesets
     def create
+      authorize Fileset
       @fileset = Fileset.new(fileset_params)
 
       if @fileset.save

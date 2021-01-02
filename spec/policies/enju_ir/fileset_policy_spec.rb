@@ -23,7 +23,9 @@ RSpec.describe EnjuIr::FilesetPolicy, type: :policy do
   end
 
   permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows creating a new fileset if an user signed in" do
+      expect(subject).to permit(users(:user1), EnjuIr::Fileset)
+    end
   end
 
   permissions :update? do
