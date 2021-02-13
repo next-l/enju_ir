@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.test.datacite.org/dois
     body:
       encoding: UTF-8
-      string: '{"data":{"id":"/edeb6498-b931-4c8c-aece-19375346bb55","type":"dois","attributes":{"event":"register","doi":null,"creators":null,"titles":null,"publisher":null,"publication_year":null,"types":null,"url":null,"schema_version":null}}}'
+      string: '{"data":{"id":null,"type":"dois","attributes":{"event":null,"doi":null,"creators":[],"titles":[{"title":"manifestation_title_4"}],"publisher":"[]","publicationYear":null,"types":null,"url":null,"schema_version":null}}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -25,7 +25,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Sat, 02 Jan 2021 03:55:36 GMT
+      - Sat, 13 Feb 2021 10:40:17 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -39,16 +39,18 @@ http_interactions:
       Vary:
       - Accept-Encoding, Origin
       X-Request-Id:
-      - e9a089bc-79fb-48d1-ad1b-0f37ec206429
+      - dd949aaf-f844-4595-9245-beb2b6c0fd7c
       X-Runtime:
-      - '0.024112'
+      - '0.024364'
+      X-Rack-Cors:
+      - miss; no-origin
       X-Powered-By:
-      - Phusion Passenger 6.0.6
+      - Phusion Passenger 6.0.7
       Server:
-      - nginx/1.14.0 + Phusion Passenger 6.0.6
+      - nginx/1.14.0 + Phusion Passenger 6.0.7
     body:
       encoding: ASCII-8BIT
       string: '{"errors":[{"status":"404","title":"The resource you are looking for
         doesn''t exist."}]}'
-  recorded_at: Sat, 02 Jan 2021 03:55:36 GMT
+  recorded_at: Sat, 13 Feb 2021 10:40:17 GMT
 recorded_with: VCR 6.0.0

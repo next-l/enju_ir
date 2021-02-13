@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors     = ["Kosuke Tanabe"]
   spec.email       = ["nabeta@fastmail.fm"]
   spec.homepage    = "https://github.com/next-l/enju_ir"
-  spec.summary     = "Next-L Institutiona Repository module"
-  spec.description = "Next-L Institutiona Repository module"
+  spec.summary     = "Next-L Enju Institutional Repository module"
+  spec.description = "Next-L Enju Institutional Repository module"
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "jquery-rails"
   spec.add_dependency "paper_trail"
   spec.add_dependency "jsonapi-serializer"
+  spec.add_dependency "ro-crate", "~> 0.4.1"
 
   spec.add_development_dependency "pg"
   spec.add_development_dependency "devise"
@@ -45,4 +46,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "resque"
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "vcr"
+  spec.add_development_dependency "sunspot_solr"
 end

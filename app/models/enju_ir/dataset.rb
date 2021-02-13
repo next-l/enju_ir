@@ -38,21 +38,31 @@ module EnjuIr
       end
     end
 
-    def register_doi(options = {status: 'register'})
-      base_url = ENV.fetch('DATACITE_API_URL', 'https://api.test.datacite.org')
-      data = EnjuIr::Datacite.new
-      data.event = options[:status]
+    def register
+      post({status: 'register'})
+    end
 
+    def publish
+      post({status: 'publish'})
+    end
+
+    def hide
+      post({status: 'hide'})
+    end
+
+    private
+
+    def post(options = {})
+      base_url = ENV.fetch('DATACITE_API_URL', 'https://api.test.datacite.org')
       if manifestation.doi_record
         uri = URI.parse("#{base_url}/dois/#{manifestation.doi_record.body}")
         request = Net::HTTP::Put.new(uri)
       else
-        data.id = "#{ENV['ENJU_IR_DOI_PREFIX']}/#{id}"
         uri = URI.parse("#{base_url}/dois")
         request = Net::HTTP::Post.new(uri)
       end
 
-      request.body = EnjuIr::DataciteSerializer.new(data).serializable_hash.to_json
+      request.body = payload(options)
       request.content_type = "application/vnd.api+json"
       request.basic_auth(ENV['YOUR_CLIENT_ID'], ENV['YOUR_PASSWORD'])
       req_options = {
@@ -62,6 +72,22 @@ module EnjuIr
       Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
         http.request(request)
       end
+    end
+
+    def payload(options = {status: 'register'})
+      data = EnjuIr::Datacite.new(
+        event: options[:status],
+        titles: [{
+          title: manifestation.original_title
+        }],
+        creators: manifestation.creators.map{|agent| agent.full_name},
+        publisher: manifestation.publisher,
+        publicationYear: manifestation.year_of_publication
+      )
+
+      data.id = "#{ENV.fetch('ENJU_IR_DOI_PREFIX', '10.12345')}/#{id}" if manifestation.doi_record
+
+      EnjuIr::DataciteSerializer.new(data).serializable_hash.to_json
     end
   end
 end

@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.test.datacite.org/dois
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":null,"type":"dois","attributes":{"event":"register","doi":null,"creators":[],"titles":[{"title":"manifestation_title_1"}],"publisher":"[]","publicationYear":null,"types":null,"url":null,"schema_version":null}}}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.test.datacite.org
+      Content-Type:
+      - application/vnd.api+json
+      Authorization:
+      - Basic Og==
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Sat, 13 Feb 2021 10:40:48 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 404 Not Found
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Accept-Encoding, Origin
+      X-Request-Id:
+      - 38a88da2-6a76-4271-af60-cd3051568956
+      X-Runtime:
+      - '0.032133'
+      X-Rack-Cors:
+      - miss; no-origin
+      X-Powered-By:
+      - Phusion Passenger 6.0.7
+      Server:
+      - nginx/1.14.0 + Phusion Passenger 6.0.7
+    body:
+      encoding: ASCII-8BIT
+      string: '{"errors":[{"status":"404","title":"The resource you are looking for
+        doesn''t exist."}]}'
+  recorded_at: Sat, 13 Feb 2021 10:40:48 GMT
+recorded_with: VCR 6.0.0
