@@ -64,7 +64,7 @@ module EnjuIr
 
       request.body = payload(options)
       request.content_type = "application/vnd.api+json"
-      request.basic_auth(ENV['YOUR_CLIENT_ID'], ENV['YOUR_PASSWORD'])
+      request.basic_auth(ENV['DATACITE_API_CLIENT_ID'], ENV['DATACITE_API_PASSWORD'])
       req_options = {
         use_ssl: true
       }
